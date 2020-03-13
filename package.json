@@ -1,0 +1,15 @@
+{
+  "name": "webapi",
+  "version": "1.0.0",
+  "description": "Meta API",
+  "main": "api/server.js",
+  "scripts": {
+    "test": "test",
+    "start": "nodemon api/server.js"
+  },
+  "author": "Willian Gustavo Rigo",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^2.0.2"
+  }
+}

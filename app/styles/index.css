@@ -1,0 +1,34 @@
+header {
+  background-color: #1068b9; 
+}
+
+.title {
+  color: white;
+  text-align: center;
+  width: '100%'
+}
+
+#tablearea {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+tr:hover {
+  color: gold;
+}
+
+tr {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: orange;
+}
+
+table {
+  margin-top: 100px;
+  padding: 15px;
+  background-color: #1068b9;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+  border-radius: 2px;
+  width: 50%;
+  max-width: 500px;
+}
