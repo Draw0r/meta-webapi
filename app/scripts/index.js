@@ -1,25 +1,19 @@
-const contacts = []
+let contacts = []
 
 const editContact = ({ id }) => {
   
 }
 
-const fetchContacts = () => {
-  // fetch('http://localhost:3000')
-  // .then(
-  //   response => alert(response.text()) // .json(), etc.
-  //   // same as function(response) {return response.text();}
-  // )
-  // return
+const fetchContacts = async () => {
   const XHR = new XMLHttpRequest();
-  // XHR.addEventListener("load", (event) => {
-  //   // alert( event.target.responseText );
-  //   alert('hi')
-  // });
-  XHR.onreadystatechange = function() {
-  if (XHR.readyState == XMLHttpRequest.DONE) {
-      alert(XHR.responseText);
-  }}
+
+    XHR.onreadystatechange = () => {
+    if (XHR.readyState == XMLHttpRequest.DONE) {
+      contacts = Array.from(JSON.parse(XHR.responseText));
+      insertContacts();
+    }
+  };
+  
   XHR.addEventListener("error", ( event ) => {
     alert( 'Oops! Something went wrong.' );
   } );
@@ -35,20 +29,16 @@ const postContact = () => {
   const valor = document.getElementById('valor').value;
   const obs = document.getElementById('obs').value;
   
-  // Define what happens on successful data submission
   XHR.addEventListener("load", function(event) {
     alert( event.target.responseText );
   });
 
-  // Define what happens in case of error
   XHR.addEventListener("error", function( event ) {
     alert( 'Oops! Something went wrong.' );
   } );
 
-  // Set up our request
   XHR.open( "POST", "http://localhost:3000" );
 
-  // The data sent is what the user provided in the form
   XHR.send(
     JSON.stringify({
     nome,
@@ -64,8 +54,11 @@ form.addEventListener("submit", (e) => {
 });
 
 const insertContacts = () => {
-  const table = document.createElement('table');
+  let table = (document.getElementsByTagName('TABLE') 
+  && document.getElementsByTagName('TABLE')[0])
+  || document.createElement('table')
   
+  alert(contacts)
   const tr = document.createElement('tr')
   const ths = ['ID', 'Nome', 'Canal', 'Observação', 'Ação'];
   ths.forEach((header, i) => {
@@ -91,28 +84,7 @@ const setFormVisible = () => {
   if (form.classList.contains('hidden')) form.classList.remove('hidden')
   else form.classList.add('hidden');
 }
-// post = ( data ) => {
-//   alert('hi')
-//   const XHR = new XMLHttpRequest(),
-//         FD  = new FormData();
 
-//   for (name in data) {
-//     FD.append(name, data[name]);
-//   }
-
-//   XHR.addEventListener( 'load', function( event ) {
-//     alert( 'Yeah! Data sent and response loaded.' );
-//   });
-
-//   XHR.addEventListener('error', function( event ) {
-//     alert( 'Oops! Something went wrong.' );
-//   });
-
-//   XHR.open('POST', 'http://localhost:3000' );
-
-//   // Send our FormData object; HTTP headers are set automatically
-//   XHR.send(FD);
-// }
 fetchContacts();
 insertContacts();
 
