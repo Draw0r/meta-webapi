@@ -1,3 +1,5 @@
+const btn = document.getElementById('newContact');
+
 const insertContacts = () => {
   const table = document.createElement('table');
   const contacts = [
@@ -40,4 +42,30 @@ const setFormVisible = () => {
   else form.classList.add('hidden');
 }
 
+sendData = ( data ) => {
+  alert('hi')
+  const XHR = new XMLHttpRequest(),
+        FD  = new FormData();
+
+  for (name in data) {
+    FD.append(name, data[name]);
+  }
+
+  XHR.addEventListener( 'load', function( event ) {
+    alert( 'Yeah! Data sent and response loaded.' );
+  });
+
+  XHR.addEventListener('error', function( event ) {
+    alert( 'Oops! Something went wrong.' );
+  });
+
+  XHR.open('POST', 'http://localhost:3000' );
+
+  // Send our FormData object; HTTP headers are set automatically
+  XHR.send(FD);
+}
+
 insertContacts();
+btn.addEventListener( 'click', function() 
+  { sendData( {test:'ok'} ); 
+})

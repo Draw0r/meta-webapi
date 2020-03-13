@@ -34,6 +34,5 @@ module.exports = http.createServer(async (req, res) => {
   const response = await (contacts[pathname][method])({ ...body, ...params });
   res.statusCode = response.status;
   res.data = response.data;
-  console.log(response);
   res.end(JSON.stringify(response.data));
 })
