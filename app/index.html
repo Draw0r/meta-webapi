@@ -15,7 +15,7 @@
   <div id="options">
     <button onClick="setFormVisible()">Adicionar novo contato</button>
   </div>
-  <form action="/" class="hidden">
+  <form action="javascript:sendData();" method="GET" class="hidden" id="form">
     <label for="name">Nome</label>
     <input type="text" id="name" placeholder="Nome do contato" required>
 

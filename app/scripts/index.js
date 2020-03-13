@@ -1,5 +1,35 @@
-const btn = document.getElementById('newContact');
+const form = document.getElementById('form')
+function sendData() {
+  const XHR = new XMLHttpRequest();
 
+  // Bind the FormData object and the form element
+  const FD = new FormData( form );
+
+  // Define what happens on successful data submission
+  XHR.addEventListener( "load", function(event) {
+    alert( event.target.responseText );
+  } );
+
+  // Define what happens in case of error
+  XHR.addEventListener( "error", function( event ) {
+    alert( 'Oops! Something went wrong.' );
+  } );
+
+  // Set up our request
+  XHR.open( "POST", "http://localhost:3000" );
+
+  // The data sent is what the user provided in the form
+  XHR.send( FD );
+}
+
+// ...and take over its submit event.
+form.addEventListener( "submit", function ( event ) {
+  event.preventDefault();
+
+  sendData();
+} );
+
+const post = (e) => alert(e)
 const insertContacts = () => {
   const table = document.createElement('table');
   const contacts = [
@@ -41,31 +71,28 @@ const setFormVisible = () => {
   if (form.classList.contains('hidden')) form.classList.remove('hidden')
   else form.classList.add('hidden');
 }
+// post = ( data ) => {
+//   alert('hi')
+//   const XHR = new XMLHttpRequest(),
+//         FD  = new FormData();
 
-sendData = ( data ) => {
-  alert('hi')
-  const XHR = new XMLHttpRequest(),
-        FD  = new FormData();
+//   for (name in data) {
+//     FD.append(name, data[name]);
+//   }
 
-  for (name in data) {
-    FD.append(name, data[name]);
-  }
+//   XHR.addEventListener( 'load', function( event ) {
+//     alert( 'Yeah! Data sent and response loaded.' );
+//   });
 
-  XHR.addEventListener( 'load', function( event ) {
-    alert( 'Yeah! Data sent and response loaded.' );
-  });
+//   XHR.addEventListener('error', function( event ) {
+//     alert( 'Oops! Something went wrong.' );
+//   });
 
-  XHR.addEventListener('error', function( event ) {
-    alert( 'Oops! Something went wrong.' );
-  });
+//   XHR.open('POST', 'http://localhost:3000' );
 
-  XHR.open('POST', 'http://localhost:3000' );
-
-  // Send our FormData object; HTTP headers are set automatically
-  XHR.send(FD);
-}
+//   // Send our FormData object; HTTP headers are set automatically
+//   XHR.send(FD);
+// }
 
 insertContacts();
-btn.addEventListener( 'click', function() 
-  { sendData( {test:'ok'} ); 
-})
+

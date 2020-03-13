@@ -22,8 +22,9 @@ module.exports = http.createServer(async (req, res) => {
     'idContato': ['put', 'get'],
     '/': ['post', 'get'],
   }
-
+  console.log("oi")
   res.setHeader('Content-Type', 'application/json');
+  res.setHeader('Access-Control-Allow-Origin', '*');
   if (!Object.keys(availableMethods).includes(pathname)
     ||!availableMethods[pathname].includes(method)) {
       res.statusCode = 404;
