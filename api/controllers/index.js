@@ -12,7 +12,8 @@ module.exports = http.createServer(async (req, res) => {
   };
   let body = '';
 
-  body = JSON.parse((await new Promise((resolve, reject) => {
+  if(method != 'get')
+    body = JSON.parse((await new Promise((resolve, reject) => {
     req.on('data', chunk => {
       resolve(chunk);
     })
@@ -22,7 +23,6 @@ module.exports = http.createServer(async (req, res) => {
     'idContato': ['put', 'get'],
     '/': ['post', 'get'],
   }
-  console.log("oi")
   res.setHeader('Content-Type', 'application/json');
   res.setHeader('Access-Control-Allow-Origin', '*');
   if (!Object.keys(availableMethods).includes(pathname)
