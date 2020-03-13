@@ -1,3 +1,5 @@
+@import 'form.css';
+
 header {
   background-color: #1068b9; 
 }
@@ -21,6 +23,13 @@ tr:hover {
 tr {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   color: orange;
+}
+
+#options {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2%;
 }
 
 table {

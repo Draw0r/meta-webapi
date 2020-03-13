@@ -5,15 +5,17 @@ const insertContacts = () => {
       id: 1,
       nome: 'willian',
       canal: 'canal',
+      obs: '123',
     },
     {
       id: 2,
       nome: 'Thomas Shelby',
       canal: 'canal1',
+      obs: '123',
     },
   ]; 
   const tr = document.createElement('tr')
-  const ths = ['id', 'nome', 'canal', 'observação'];
+  const ths = ['ID', 'Nome', 'Canal', 'Observação', 'Ação'];
   ths.forEach((header, i) => {
     const th = document.createElement('th')
     th.appendChild(document.createTextNode(header))
