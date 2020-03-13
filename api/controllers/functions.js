@@ -5,11 +5,17 @@ const fetchData = async () => {
   return JSON.parse(data.toString()).data;
 }
 
-// const exists = async (itemId) => {
-//   const data = await fetchData()
-//   const items = data.filter(({ id }) => String(id) === String(itemId));
-//   return items.length > 0;
-// }
+const addItem = async (params) => {
+  let data = await fetchData();
+  const id = (data.length + 1).toString();
+  params.id = id;
+  data.push({
+    ...params,
+  })
+  const res = { data };
+  await fs.writeFile('./api/data.json', Buffer.from(JSON.stringify(res)));
+  return { ...params };
+}
 
 const findById = async (itemId, data) => {
   const items = data.filter(({ id }) => Number(id) === Number(itemId));
@@ -55,7 +61,6 @@ const contacts = {
         }
     },
     put: async ({ id, nome, canal, valor, obs }) => {
-      console.log(id, nome, canal, valor, obs)
       if (!id || !nome || !canal || !valor) return {
         status: 400,
       }
@@ -104,16 +109,16 @@ const contacts = {
     }
   },
   '/': {
-    get: async (size = 10, page = 0) => {
+    get: async ({size = 10, page = 0}) => {
       const data = await fetchData();
-      if ((page + 1) * size > data.length) return {
+      if (page * size > data.length) return {
           status: 200,
           data: []
         }
       const numOfPages = parseInt(data.length / size) + 1;
       const res = 
         page === numOfPages - 1
-        ? data.slice(0, size * page + data.length % numOfPages)
+        ? data.slice(0, size * page + data.length % size)
         : data.slice( size * page, size * (page + 1));
       
       return {
@@ -121,9 +126,31 @@ const contacts = {
           data: res
         }
     },
-    post: () => {
+    post: async ({ nome, canal, valor, obs }) => {
+      if (!nome || !canal || !valor) return {
+        status: 400,
+        data: 'Missing parameters'
+      }
+      if (typeof nome !== 'string'
+        || typeof canal !== 'string'
+        || typeof valor !== 'string'
+        || (obs && typeof obs !== 'string')) return {
+          status: 400,
+          data: 'Invalid parameter type',
+        }
 
-    }
+      const res = await addItem({
+        nome,
+        canal,
+        valor,
+        obs
+      })
+
+      return {
+        status: 200,
+        data: res,
+      };
+    },
   }
 };
 
