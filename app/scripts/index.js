@@ -34,4 +34,10 @@ const insertContacts = () => {
   document.getElementById('tablearea').appendChild(table);
 }
 
+const setFormVisible = () => {
+  const form = document.getElementsByTagName('FORM')[0];
+  if (form.classList.contains('hidden')) form.classList.remove('hidden')
+  else form.classList.add('hidden');
+}
+
 insertContacts();
