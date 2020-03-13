@@ -1,10 +1,12 @@
-const form = document.getElementById('form')
 function sendData() {
+  const form = document.getElementById('form')
   const XHR = new XMLHttpRequest();
 
-  // Bind the FormData object and the form element
-  const FD = new FormData( form );
-
+  const nome = document.getElementById('nome').value;
+  const canal = document.getElementById('canal').value;
+  const valor = document.getElementById('valor').value;
+  const obs = document.getElementById('obs').value;
+  
   // Define what happens on successful data submission
   XHR.addEventListener( "load", function(event) {
     alert( event.target.responseText );
@@ -19,13 +21,19 @@ function sendData() {
   XHR.open( "POST", "http://localhost:3000" );
 
   // The data sent is what the user provided in the form
-  XHR.send( FD );
+  XHR.send(
+    JSON.stringify({
+    nome,
+    canal,
+    valor,
+    obs
+  }));
 }
 
 // ...and take over its submit event.
 form.addEventListener( "submit", function ( event ) {
   event.preventDefault();
-
+  console.log(event)
   sendData();
 } );
 

@@ -15,15 +15,18 @@
   <div id="options">
     <button onClick="setFormVisible()">Adicionar novo contato</button>
   </div>
-  <form action="javascript:sendData();" method="GET" class="hidden" id="form">
+  <form class="hidden" id="form">
     <label for="name">Nome</label>
-    <input type="text" id="name" placeholder="Nome do contato" required>
+    <input type="text" name="nome" id="nome" placeholder="Nome do contato" required>
 
-    <label for="channel">Canal</label>
-    <input type="text" id="channel" placeholder="Canal de contato" required>
+    <label for="name">Valor do canal de contato</label>
+    <input type="text" name="valor" id="valor" placeholder="Valor do canal de contato" required>
+
+    <label for="channel">Canal de contato</label>
+    <input type="text" name="canal" id="canal" placeholder="Canal de contato" required>
 
     <label for="obs">Observações</label>
-    <input type="text" id="obs" placeholder="Observações (opcional)">
+    <input type="text" name="obs" id="obs" placeholder="Observações (opcional)">
 
     <input id="newContact" type="submit" value="Submit">
   </form>
