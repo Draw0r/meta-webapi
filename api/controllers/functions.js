@@ -17,7 +17,7 @@ const addItem = async (params) => {
   return { ...params };
 }
 
-const findById = async (itemId, data) => {
+const findById = (itemId, data) => {
   const items = data.filter(({ id }) => Number(id) === Number(itemId));
   return items.length > 0 ? items[0] : null;
 }
@@ -32,7 +32,7 @@ const removeItem = (item, data) => {
 
 const update = async (params) => {
   let data = await fetchData();
-  const item = await findById(params.id, data);
+  const item = findById(params.id, data);
   if (!item) return null;
   data = removeItem(item, data);
   data.push({
@@ -95,16 +95,20 @@ const contacts = {
         },
       };
     },
-    delete: async (contactId) => {
-      const data = await fetchData();
-      const item = await findById(contactId, data);
-      if(item) return {
-        status: 204,
-        data: true,
-      }
-      removeItem(contactId, data);
-      return {
-        deleted: item,
+    delete: async ({ id: contactId }) => {
+      let data = await fetchData();
+      const item = findById(contactId, data);
+      if(item) {
+        data = removeItem(item, data);
+        const res = { data };
+        await fs.writeFile('./api/data.json', Buffer.from(JSON.stringify(res)));
+        return {
+          status: 204,
+          data: true,
+        }
+      } else return {
+        status: 404,
+        data: 'contact not found',
       }
     }
   },

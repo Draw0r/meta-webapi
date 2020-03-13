@@ -12,7 +12,7 @@ module.exports = http.createServer(async (req, res) => {
   };
   let body = '';
 
-  if(method != 'get')
+  if(method === 'put')
     body = JSON.parse((await new Promise((resolve, reject) => {
     req.on('data', chunk => {
       resolve(chunk);
@@ -20,7 +20,7 @@ module.exports = http.createServer(async (req, res) => {
   })).toString());
 
   const availableMethods = {
-    'idContato': ['put', 'get'],
+    'idContato': ['put', 'get', 'delete'],
     '/': ['post', 'get'],
   }
   res.setHeader('Content-Type', 'application/json');
