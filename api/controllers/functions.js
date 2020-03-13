@@ -53,7 +53,6 @@ const contacts = {
           status: 404,
           data: {},
         }
-    
     },
     put: async ({ id, nome, canal, valor, obs }) => {
       console.log(id, nome, canal, valor, obs)
@@ -105,8 +104,23 @@ const contacts = {
     }
   },
   '/': {
-    get: () => {
-
+    get: async (size = 10, page = 0) => {
+      const data = await fetchData();
+      if ((page + 1) * size > data.length) return {
+          status: 200,
+          data: []
+        }
+      const numOfPages = parseInt(data / size) + 1;
+      let pages = [];
+      const res = 
+        page === numOfPages - 1
+        ? data.slice(0, i * size * page + data.length % numOfPages)
+        : data.slice(i * size * page, i * size * (page + 1));
+      
+      return {
+          status: 200,
+          data: res
+        }
     },
     post: () => {
 
