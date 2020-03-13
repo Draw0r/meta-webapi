@@ -110,12 +110,11 @@ const contacts = {
           status: 200,
           data: []
         }
-      const numOfPages = parseInt(data / size) + 1;
-      let pages = [];
+      const numOfPages = parseInt(data.length / size) + 1;
       const res = 
         page === numOfPages - 1
-        ? data.slice(0, i * size * page + data.length % numOfPages)
-        : data.slice(i * size * page, i * size * (page + 1));
+        ? data.slice(0, size * page + data.length % numOfPages)
+        : data.slice( size * page, size * (page + 1));
       
       return {
           status: 200,
