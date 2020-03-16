@@ -1,12 +1,14 @@
 
 form {
-  /* display: flex;
+  margin-top: 5px;
+  display: flex;
   justify-content: space-between;
-  align-items: center; */
+  align-items: center;
+  flex-direction: column;
   width: 100%;
 }
 
-input[type=text], select {
+input[type=text] {
   width: 80%;
   padding: 12px 10px;
   margin: 2px 0;
@@ -18,7 +20,7 @@ input[type=text], select {
 
 input[type=submit] {
   width: 100%;
-  background-color: #4CAF50;
+  background-color: #1068b9;
   color: white;
   padding: 14px 20px;
   margin: 8px 0;
@@ -28,5 +30,5 @@ input[type=submit] {
 }
 
 input[type=submit]:hover {
-  background-color: #45a049;
+  background-color: rgb(43,43,135);
 }

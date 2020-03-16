@@ -1,10 +1,19 @@
 @import 'form.css';
 @import 'modal.css';
 
+* {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
 header {
-  background-color: #1068b9; 
+  background: rgb(2,0,36);
+  background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(43,43,135,1) 47%, rgba(16,104,185,1) 100%);
   height: 100px;
   line-height: 100px;
+}
+
+h1 {
+  color: rgba(255, 255, 255, 0.8);
 }
 
 .blurry {
@@ -31,13 +40,8 @@ header {
   justify-content: center;
 }
 
-tr:hover {
-  color: gold;
-}
-
 tr {
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  color: orange;
+  color: white;
 }
 
 #options {

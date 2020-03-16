@@ -14,7 +14,7 @@ const editContact = ({ id }) => {
   });
 
   XHR.addEventListener("error", function( event ) {
-    alert( 'Oops! Something went wrong.' );
+    alert( 'Erro ao editar contato.' );
   });
 
   XHR.open( "PUT", `http://localhost:3000/${id}` );
@@ -26,6 +26,8 @@ const editContact = ({ id }) => {
     valor,
     obs
   }));
+  setEditModalVisible();
+
 }
 
 const deleteContact = ({ id }) => {
@@ -35,7 +37,7 @@ const deleteContact = ({ id }) => {
     fetchContacts();
   });
   XHR.addEventListener("error", function( event ) {
-    alert( 'Oops! Something went wrong.' );
+    alert( 'Erro ao deletar contato.' );
   } );
   XHR.open( "DELETE", `http://localhost:3000/${id}` );
   XHR.send();
@@ -52,10 +54,16 @@ const fetchContacts = async () => {
   };
   
   XHR.addEventListener("error", ( event ) => {
-    alert( 'Oops! Something went wrong.' );
+    alert( 'Erro ao buscar os contatos.' );
   } );
   XHR.open( "get", "http://localhost:3000", true);
   XHR.send();
+}
+
+toggleBlur = () => {
+  const content = document.getElementsByClassName('fixed-content')[0];
+  if (content.classList.contains('blurry')) content.classList.remove('blurry')
+  else content.classList.add('blurry');
 }
 
 const postContact = () => {
@@ -83,6 +91,8 @@ const postContact = () => {
     valor,
     obs
   }));
+
+  setAddModalVisible();
 }
 
 postForm = document.getElementById('postForm');
@@ -99,7 +109,7 @@ const insertContacts = () => {
   table = document.createElement('table');
 
   const tr = document.createElement('tr')
-  const ths = ['ID', 'Nome', 'Canal', 'Observação', 'Ação'];
+  const ths = ['ID', 'Nome', 'Canal', 'Valor','Observação', 'Ação'];
   ths.forEach((header, i) => {
     const th = document.createElement('th')
     th.appendChild(document.createTextNode(header))
@@ -140,12 +150,14 @@ const setAddModalVisible = () => {
   const modal = document.getElementById('addModal');
   if (modal.classList.contains('hidden')) modal.classList.remove('hidden')
   else modal.classList.add('hidden');
+  toggleBlur();
 }
 
 const setEditModalVisible = () => {
   const modal = document.getElementById('editModal');
   if (modal.classList.contains('hidden')) modal.classList.remove('hidden')
   else modal.classList.add('hidden');
+  toggleBlur();
 }
 
 fetchContacts();

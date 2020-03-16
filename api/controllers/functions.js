@@ -9,8 +9,21 @@ const addItem = async (params) => {
   let data = await fetchData();
   const id = (data.length + 1).toString();
   params.id = id;
+  const {
+    nome,
+    valor,
+    obs,
+    canal
+  } = params;
+  const obj = {
+    id,
+    nome,
+    canal,
+    valor,
+    obs
+  }
   data.push({
-    ...params,
+    ...obj,
   })
   const res = { data };
   await fs.writeFile('./api/data.json', Buffer.from(JSON.stringify(res)));
@@ -168,5 +181,4 @@ const contacts = {
   }
 };
 
-// (async () => console.log(await contacts['idContato'].put({ id: 2 })))();
 module.exports = contacts;
