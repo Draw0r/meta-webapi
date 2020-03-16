@@ -1,4 +1,4 @@
-#modal {
+.modal {
   position: relative;
   top: calc(50% - 100px);
   left: calc(50% - 150px);

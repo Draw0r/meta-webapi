@@ -1,7 +1,31 @@
 let contacts = []
+let editId;
 
 const editContact = ({ id }) => {
+  const XHR = new XMLHttpRequest();
 
+  const nome = document.getElementById('editNome').value;
+  const canal = document.getElementById('editCanal').value;
+  const valor = document.getElementById('editValor').value;
+  const obs = document.getElementById('editObs').value;
+
+  XHR.addEventListener("load", function(event) {
+    alert( event.target.responseText );
+  });
+
+  XHR.addEventListener("error", function( event ) {
+    alert( 'Oops! Something went wrong.' );
+  });
+
+  XHR.open( "PUT", `http://localhost:3000/${id}` );
+
+  XHR.send(
+    JSON.stringify({
+    nome,
+    canal,
+    valor,
+    obs
+  }));
 }
 
 const deleteContact = ({ id }) => {
@@ -38,11 +62,11 @@ const fetchContacts = async () => {
 const postContact = () => {
   const XHR = new XMLHttpRequest();
 
-  const nome = document.getElementById('nome').value;
-  const canal = document.getElementById('canal').value;
-  const valor = document.getElementById('valor').value;
-  const obs = document.getElementById('obs').value;
-  
+  const nome = document.getElementById('addNome').value;
+  const canal = document.getElementById('addCanal').value;
+  const valor = document.getElementById('addValor').value;
+  const obs = document.getElementById('addObs').value;
+
   XHR.addEventListener("load", function(event) {
     alert( event.target.responseText );
   });
@@ -94,7 +118,14 @@ const insertContacts = () => {
     })
     const editBtn = document.createElement("BUTTON");
     editBtn.innerHTML = "Editar";
-    editBtn.onclick = (() => editContact({ id }))
+    editBtn.onclick = (() => {
+      const editForm = document.getElementById('editForm');
+      editForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        editContact({ id });
+      });
+      setEditModalVisible();
+    })
     const deleteBtn = document.createElement("BUTTON");
     deleteBtn.innerHTML = "Excluir";
     deleteBtn.onclick = (() => deleteContact({ id }))
@@ -106,11 +137,16 @@ const insertContacts = () => {
   document.getElementById('tablearea').appendChild(table);
 }
 
-const setFormVisible = () => {
-  const form = document.getElementById('postForm');
-  console.log('form: ', form);
-  if (form.classList.contains('hidden')) form.classList.remove('hidden')
-  else form.classList.add('hidden');
+const setAddModalVisible = () => {
+  const modal = document.getElementById('addModal');
+  if (modal.classList.contains('hidden')) modal.classList.remove('hidden')
+  else modal.classList.add('hidden');
+}
+
+const setEditModalVisible = () => {
+  const modal = document.getElementById('editModal');
+  if (modal.classList.contains('hidden')) modal.classList.remove('hidden')
+  else modal.classList.add('hidden');
 }
 
 fetchContacts();
