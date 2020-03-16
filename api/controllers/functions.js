@@ -7,7 +7,10 @@ const fetchData = async () => {
 
 const addItem = async (params) => {
   let data = await fetchData();
-  const id = (data.length + 1).toString();
+  const maxId = data
+    .map(({ id }) => id)
+    .sort((a, b) => a < b)[0]
+  const id = (Number(maxId) + 1).toString();
   params.id = id;
   const {
     nome,
