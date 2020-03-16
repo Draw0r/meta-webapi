@@ -2,4 +2,4 @@
 
 ## Configuração
 npm install + npm start (para iniciar a API);
-O front foi iniciado no arquivo index.html, da pasta APP, porém não foi finalizado.
+O front está contido inteiramente no index.html, apenas abra ele no navegador.
