@@ -86,7 +86,6 @@ const insertContacts = () => {
     const tr = document.createElement('tr')
     Object.keys(contact).forEach((key) => {
       const td = tr.appendChild(document.createElement('td'));
-      
       if(key.toLowerCase() === 'id') id = contact[key];
       td.appendChild(document.createTextNode(contact[key]));
     })
