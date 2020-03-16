@@ -12,7 +12,7 @@ module.exports = http.createServer(async (req, res) => {
   };
   let body = '';
 
-  if(method === 'put')
+  if(method === 'put' || method === 'post')
     body = JSON.parse((await new Promise((resolve, reject) => {
     req.on('data', chunk => {
       resolve(chunk);
