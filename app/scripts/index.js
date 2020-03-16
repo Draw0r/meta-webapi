@@ -10,7 +10,7 @@ const deleteContact = ({ id }) => {
   XHR.addEventListener("load", function(event) {
     fetchContacts();
   });
-
+  console.log('ID', id);
   XHR.addEventListener("error", function( event ) {
     alert( 'Oops! Something went wrong.' );
   } );
@@ -81,8 +81,8 @@ const insertContacts = () => {
   })
   table.appendChild(tr);
 
-  let id;
   contacts.forEach((contact) => {
+    let id;
     const tr = document.createElement('tr')
     Object.keys(contact).forEach((key) => {
       const td = tr.appendChild(document.createElement('td'));

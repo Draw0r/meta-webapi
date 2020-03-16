@@ -103,13 +103,18 @@ const contacts = {
         const res = { data };
         await fs.writeFile('./api/data.json', Buffer.from(JSON.stringify(res)));
         return {
-          status: 204,
+          status: 200,
           data: true,
         }
       } else return {
         status: 404,
         data: 'contact not found',
       }
+    },
+    options: () => {
+      return {
+        status: 200,
+      };
     }
   },
   '/': {
@@ -155,6 +160,11 @@ const contacts = {
         data: res,
       };
     },
+    options: () => {
+      return {
+        status: 200,
+      };
+    }
   }
 };
 

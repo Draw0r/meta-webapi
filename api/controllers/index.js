@@ -20,11 +20,14 @@ module.exports = http.createServer(async (req, res) => {
   })).toString());
 
   const availableMethods = {
-    'idContato': ['put', 'get', 'delete'],
-    '/': ['post', 'get'],
+    'idContato': ['put', 'get', 'delete', 'options'],
+    '/': ['post', 'get', 'options'],
   }
   res.setHeader('Content-Type', 'application/json');
   res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Origin, Content-Type, X-Auth-Token, Authorization');
+
   if (!Object.keys(availableMethods).includes(pathname)
     ||!availableMethods[pathname].includes(method)) {
       res.statusCode = 404;
