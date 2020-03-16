@@ -10,7 +10,7 @@ const editContact = ({ id }) => {
   const obs = document.getElementById('editObs').value;
 
   XHR.addEventListener("load", function(event) {
-    alert( event.target.responseText );
+    fetchContacts();
   });
 
   XHR.addEventListener("error", function( event ) {
@@ -34,7 +34,6 @@ const deleteContact = ({ id }) => {
   XHR.addEventListener("load", function(event) {
     fetchContacts();
   });
-  console.log('ID', id);
   XHR.addEventListener("error", function( event ) {
     alert( 'Oops! Something went wrong.' );
   } );
@@ -68,7 +67,7 @@ const postContact = () => {
   const obs = document.getElementById('addObs').value;
 
   XHR.addEventListener("load", function(event) {
-    alert( event.target.responseText );
+    fetchContacts();
   });
 
   XHR.addEventListener("error", function( event ) {

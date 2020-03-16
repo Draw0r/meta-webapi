@@ -3,6 +3,8 @@
 
 header {
   background-color: #1068b9; 
+  height: 100px;
+  line-height: 100px;
 }
 
 .blurry {
