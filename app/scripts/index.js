@@ -62,7 +62,9 @@ const postContact = () => {
   }));
 }
 
-form.addEventListener("submit", (e) => {
+postForm = document.getElementById('postForm');
+
+postForm.addEventListener("submit", (e) => {
   e.preventDefault();
   postContact();
 });
@@ -70,8 +72,9 @@ form.addEventListener("submit", (e) => {
 const insertContacts = () => {
   let table = (document.getElementsByTagName('TABLE') 
   && document.getElementsByTagName('TABLE')[0])
-  || document.createElement('table')
-  
+  if(table) table.parentNode.removeChild(table);
+  table = document.createElement('table');
+
   const tr = document.createElement('tr')
   const ths = ['ID', 'Nome', 'Canal', 'Observação', 'Ação'];
   ths.forEach((header, i) => {
@@ -104,7 +107,8 @@ const insertContacts = () => {
 }
 
 const setFormVisible = () => {
-  const form = document.getElementsByTagName('FORM')[0];
+  const form = document.getElementById('postForm');
+  console.log('form: ', form);
   if (form.classList.contains('hidden')) form.classList.remove('hidden')
   else form.classList.add('hidden');
 }
