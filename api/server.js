@@ -1,4 +1,4 @@
-const server = require('./controllers');
+const server = require('./controller');
 // const hostname = process.env.HOSTNAME;
 // const port = process.env.PORT;
 
